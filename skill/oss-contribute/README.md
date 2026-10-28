@@ -43,9 +43,9 @@ careful way:
 ## Install
 
 ```sh
-git clone https://github.com/flyboy-byte/toolbox.git
+git clone https://github.com/flyboy-byte/oss.git
 mkdir -p ~/.claude/skills
-cp -r toolbox/skills/oss-contribute ~/.claude/skills/
+cp -r oss/skill/oss-contribute ~/.claude/skills/
 ```
 
 Then in Claude Code, inside a clone of the project: "find a good first issue in this repo and fix

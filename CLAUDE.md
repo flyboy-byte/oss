@@ -19,22 +19,16 @@ The local layer names people, quotes Discord, records disk and machine details: 
 
 ## Starting a contribution session
 
-Read in this order: `~/.config/oss-contribute/me.md` (identity, footers, pacing, licences), the skill (`skill/oss-contribute/SKILL.md` and `repos/<name>.md`), then `RULES.md`, `INDEX.md` (includes the do-not-re-raise list), `projects/<name>/STATE.md`, the latest `sessions/` log. All of it is a snapshot: verify with `gh` before acting. `HUB.md` is the longer local orientation.
+Read in this order: `~/.config/oss-contribute/me.md` (identity, footers, pacing, licences), the skill (`skill/oss-contribute/SKILL.md` and `repos/<name>.md`), then `RULES.md`, `INDEX.md` (includes the do-not-re-raise list), `projects/<name>/STATE.md`, the latest `sessions/` log or handoff. All of it is a snapshot: verify with `gh` before acting. `HUB.md` is the longer local orientation.
 
-## The skill copy
+## The skill
 
-`~/.claude/skills/oss-contribute/` is the installed, live copy and is where edits happen. `skill/oss-contribute/` here mirrors it:
-
-```sh
-rsync -a --delete ~/.claude/skills/oss-contribute/ skill/oss-contribute/
-```
-
-`~/projects/toolbox/skills/oss-contribute/` is an older published copy (toolbox has its own uncommitted edits to it; leave that repo alone unless Logan asks). Never copy `~/.config/oss-contribute/` into the repo.
+`skill/oss-contribute/` is the only copy. `~/.claude/skills/oss-contribute` is a symlink to it (2026-10-28), so edits made here are live at once, and committing `skill/` publishes them. toolbox no longer carries it. Never copy `~/.config/oss-contribute/` (personal settings) into the repo.
 
 ## What each kind of commit pushes
 
-- **Skill sync**: the rsync above, then commit `skill/` only. Message `skill: <what changed>`.
-- **Framework**: `PLAYBOOK.md`, `LESSONS.md`, `templates/`, written generically (no personal or other contributors' details). Message `playbook:` / `lessons:` / `templates:`.
+- **Skill**: commit `skill/` only. Message `skill: <what changed>`. A lesson struck through in `LESSONS.md` usually goes in the same commit.
+- **Framework**: `PLAYBOOK.md` (workflows being proven), `LESSONS.md` (lessons inbox), `templates/` (state, session, handoff), written generically (no personal or other contributors' details). Message `playbook:` / `lessons:` / `templates:`.
 - **Repo shape**: `README.md`, `CLAUDE.md`, `.gitignore`. When the allowlist changes, update the table above in the same commit.
 - **Local state** (`STATE.md`, `INDEX.md`, sessions): never committed. It is kept on disk only.
 

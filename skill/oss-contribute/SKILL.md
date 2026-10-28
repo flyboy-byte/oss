@@ -47,6 +47,27 @@ session links: they point at the user's own Claude session, and many people don'
 public. Credit for Claude (a `Co-Authored-By: Claude ...` trailer) is separate and is usually
 expected; see step 1. Keep `me.md` for the user's notes: their clones, open PRs, lessons.
 
+Public writes are the user's to approve one by one: commenting, editing a PR or issue, marking
+ready, pushing, forking. Some harnesses block them unless the user has said "do it" for that
+action; when they haven't, ask, or give them the exact command to run themselves (in Claude Code,
+`! <command>`). Earlier approval doesn't carry over to the next write.
+
+## Resuming
+
+A session often starts cold in a clone, mid-thread. Before acting:
+1. Read `me.md`, then the state folder it names (if any): its entry file, the project's state
+   file, and the latest session log or handoff.
+2. Run the first checks; the state files are snapshots and these are the truth:
+   ```sh
+   gh pr list -R <owner>/<repo> --author @me --state open   # each repo you work in
+   gh api notifications --jq '.[].subject.title'            # reviews and mentions since
+   git status && git log --oneline -3                       # in the clone
+   df -h /home                                              # before any build
+   ```
+3. Reconcile: where the files and `gh` disagree, `gh` wins; update the state file.
+4. End each session with a handoff: update the state file's status line (absolute date), open
+   PRs, what is waiting on whom, the do-not-re-raise list and the first commands for next time.
+
 ## 1. Is this project open to it?
 
 Before any work, read `CONTRIBUTING.md`, `AGENTS.md` / `CLAUDE.md`, the PR template, the code of
@@ -153,6 +174,11 @@ All of these, every time:
 - Visible behaviour: attach screenshots or a short recording you made yourself, before and after.
   Use small public-safe examples.
 - Fork PRs often need a maintainer to approve the CI run first (`action_required`). That's normal.
+  A fork contributor can't re-run a failed job either ("Must have admin rights"); only a
+  maintainer can. Push a fix if the failure is yours; if it looks like a flake in code you didn't
+  touch, say so with the evidence and leave the re-run to them.
+- Read a failing job narrowly: `gh run view <id> --log-failed` repeats the step command many
+  times, so grep for the test name, `panicked`, `FAILED` or `error` instead of reading it whole.
 
 ## 6. Review
 
