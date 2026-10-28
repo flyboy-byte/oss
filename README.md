@@ -11,6 +11,7 @@
   <img src="https://img.shields.io/badge/merged%20upstream-16%20PRs-2ea44f" alt="16 merged upstream PRs">
   <img src="https://img.shields.io/badge/focus-tangency--labs-6f42c1" alt="Current focus: tangency-labs">
   <img src="https://img.shields.io/badge/scope-any%20OSS%20project-informational" alt="Scope: any open-source project">
+  <img src="https://img.shields.io/badge/license-MIT-informational" alt="MIT">
 </p>
 
 <p align="center">
@@ -175,3 +176,5 @@ disagrees with the general rules, the profile wins.
 
 Live per-project state and session logs stay local: `.gitignore` is an allowlist, so nothing
 personal gets published by accident.
+
+[MIT](LICENSE)
