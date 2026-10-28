@@ -11,7 +11,7 @@ The refinement loop: work happens in a project (state in `projects/<name>/`), wh
 | Layer | Files | Pushed? |
 | --- | --- | --- |
 | Public | `README.md`, `LICENSE`, `CLAUDE.md`, `PLAYBOOK.md`, `LESSONS.md`, `skill/`, `templates/` | yes |
-| Local | `HUB.md`, `RULES.md`, `INDEX.md`, `projects/<name>/`, `sessions/` | never |
+| Local | `OUTBOX.md`, `HUB.md`, `RULES.md`, `INDEX.md`, `projects/<name>/`, `sessions/` | never |
 
 Project code lives at `~/<name>` (`~/solidcraft`, `~/solidcore`, `~/pcbcraft`; `~/cadcraft` is off limits). Its state and session notes live here in `projects/<name>/`. The repos are not moving (decided 2026-10-27).
 
@@ -19,11 +19,27 @@ The local layer names people, quotes Discord, records disk and machine details: 
 
 ## Starting a contribution session
 
-Read in this order: `~/.config/oss-contribute/me.md` (identity, footers, pacing, licences), the skill (`skill/oss-contribute/SKILL.md` and `repos/<name>.md`), then `RULES.md`, `INDEX.md` (includes the do-not-re-raise list), `projects/<name>/STATE.md`, the latest `sessions/` log or handoff. All of it is a snapshot: verify with `gh` before acting. `HUB.md` is the longer local orientation.
+**ossmain** (the session that owns this repo) reads `OUTBOX.md` first, acts on each entry, then moves handled entries into that day's `sessions/YYYY-MM-DD.md` under "OUTBOX handled" (never deleted), so `OUTBOX.md` only holds what is still open.
+
+Then read in this order: `~/.config/oss-contribute/me.md` (identity, footers, pacing, licences), the skill (`skill/oss-contribute/SKILL.md` and `repos/<name>.md`), then `RULES.md`, `INDEX.md` (includes the do-not-re-raise list), `projects/<name>/STATE.md`, the latest `sessions/` log or handoff. All of it is a snapshot: verify with `gh` before acting. `HUB.md` is the longer local orientation.
 
 ## The skill
 
 `skill/oss-contribute/` is the only copy. `~/.claude/skills/oss-contribute` is a symlink to it (2026-10-28), so edits made here are live at once, and committing `skill/` publishes them. toolbox no longer carries it. Never copy `~/.config/oss-contribute/` (personal settings) into the repo.
+
+## Project sessions pushing here
+
+A session working in a project (`~/solidcraft`, `~/solidcore`, ...) may push to this repo in one narrow lane. Logan approved it as a standing OK on 2026-10-28; anything outside it still needs his explicit OK.
+
+1. **What:** additions to `LESSONS.md` (appended at the end, not struck through) and `PLAYBOOK.md` (under "Being tried"). Generic text only: no people's names, Discord, or machine paths. `skill/`, `templates/`, `README.md`, `CLAUDE.md` and `.gitignore` are ossmain's alone, which keeps ossmain the single writer of the skill.
+2. **How:** `git pull --rebase`, one commit (`lessons: ...` / `playbook: ...`), the pre-push checks below, and `git diff --stat origin/main..HEAD` must list only those two files. If it lists anything else, don't push: write an OUTBOX entry instead.
+3. **The note:** append one block to `OUTBOX.md` (local, never pushed) for every push, and for every change you want in `skill/` but may not make:
+   ```
+   ## YYYY-MM-DD <project>: <hash or "proposal"> <subject>
+   - Files: LESSONS.md
+   - Why: <one line>
+   - For ossmain: <follow-up, e.g. "fold the new lesson into SKILL.md section 4">, or none
+   ```
 
 ## What each kind of commit pushes
 
@@ -41,4 +57,4 @@ git grep -niE 'gmail|token=|password|claude.ai/code/session' -- ':!CLAUDE.md' ':
 git log -1 --format='%an <%ae>'       # Logan Night <96597232+flyboy-byte@users.noreply.github.com>
 ```
 
-No claude.ai session links in commits here (Logan's rule overrides the harness trailer). Pushing is publishing: ask Logan first unless he has said to push.
+No claude.ai session links in commits here (Logan's rule overrides the harness trailer). Pushing is publishing: ask Logan first unless he has said to push, or it is a project session's push inside the lane above.
