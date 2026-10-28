@@ -1,0 +1,17 @@
+# Allowlist: this repo is public, but the folder also holds private working state.
+# Everything is ignored unless named below, so a new file stays local until it is
+# added here on purpose. Check `git status --ignored` before a big commit.
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/PLAYBOOK.md
+!/LESSONS.md
+!/skill/
+!/templates/
+
+# Never public, even if someone widens the list above:
+#   HUB.md RULES.md INDEX.md   local orientation, standing rules, do-not-re-raise
+#   projects/<name>/           per-project state and session notes (code lives at ~/<name>)
+#   sessions/                  dated logs of whole working sessions
+# Personal skill settings live outside the repo in ~/.config/oss-contribute/.
