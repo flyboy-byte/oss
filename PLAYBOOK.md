@@ -11,4 +11,7 @@ has worked on more than one case it moves into the skill and leaves a pointer he
   `repos/solidcraft.md`.
 
 ## Being tried
-- (none yet)
+- **A likely-related report gets an offer, not a duplicate call.** When another open issue looks
+  like the bug your PR fixes but has no reproduction, comment that it may be the same failure, name
+  the PR, and ask for the file so you can check it against the fix. Then test it before claiming
+  the PR fixes it. (First tried 2026-10-28; outcome pending.)

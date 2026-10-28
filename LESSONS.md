@@ -33,3 +33,7 @@ through with where it went, not deleted.
   PR, mark it ready as soon as the code and tests are done; leaving it a draft hides finished work
   from reviewers, and some projects' CI skips drafts entirely, so nothing has been checked
   upstream until it is ready.
+- **A red check from a cancelled run is not a failure.** When a push or a label change starts a
+  new CI run, the old one is cancelled and its summary check can stay red on the PR beside the new
+  green one. Before reacting to a red check, find the newest run for the head commit and read that;
+  only a failure in it counts.
