@@ -24,3 +24,12 @@ through with where it went, not deleted.
 - ~~**Fork contributors can't re-run CI; read failed logs narrowly.**~~ SKILL.md section 5
   (2026-10-28, from #1373's second run).
 - **zsh:** quote `=====` and globs (`--include='*.rs'`). Not in the skill: shell-specific.
+- **A triager's "reproduced" covers the failure, not the cases that seem to work.** Before
+  designing a fix, measure the working cases against the right answer too. In one sketch-offset
+  bug the report was a failure past a size threshold, but the offsets below it that succeeded were
+  also joined at the wrong point, so a fix for the threshold alone would have kept wrong geometry
+  and the real fix became a design question for the maintainers.
+- **A claim draft is not the finished state.** Where a project claims issues by opening a draft
+  PR, mark it ready as soon as the code and tests are done; leaving it a draft hides finished work
+  from reviewers, and some projects' CI skips drafts entirely, so nothing has been checked
+  upstream until it is ready.
