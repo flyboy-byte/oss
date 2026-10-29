@@ -10,7 +10,7 @@ The refinement loop: work happens in a project (state in `projects/<name>/`), wh
 
 | Layer | Files | Pushed? |
 | --- | --- | --- |
-| Public | `README.md`, `LICENSE`, `CLAUDE.md`, `PLAYBOOK.md`, `LESSONS.md`, `skill/`, `templates/` | yes |
+| Public | `README.md`, `LICENSE`, `CLAUDE.md`, `PLAYBOOK.md`, `LESSONS.md`, `scopes/`, `skill/`, `templates/` | yes |
 | Local | `OUTBOX.md`, `HUB.md`, `RULES.md`, `INDEX.md`, `projects/<name>/`, `sessions/` | never |
 
 Project code lives at `~/<name>` (`~/solidcraft`, `~/solidcore`, `~/pcbcraft`; `~/cadcraft` is off limits). Its state and session notes live here in `projects/<name>/`. The repos are not moving (decided 2026-10-27).

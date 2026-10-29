@@ -171,6 +171,7 @@ disagrees with the general rules, the profile wins.
 | [`skill/oss-contribute/`](skill/oss-contribute/) | The skill: [`SKILL.md`](skill/oss-contribute/SKILL.md), the general [playbook](skill/oss-contribute/reference/workflows.md), per-project [profiles](skill/oss-contribute/repos/), and [`contrib-check.sh`](skill/oss-contribute/scripts/contrib-check.sh) for the pre-push checks |
 | [`PLAYBOOK.md`](PLAYBOOK.md) | Workflows still being proven, before they move into the skill |
 | [`LESSONS.md`](LESSONS.md) | The lessons inbox: each mistake, and where in the skill it was fixed |
+| [`scopes/`](scopes/) | Written-up scopes for areas to help in when nothing triaged is left, from public sources only |
 | [`templates/`](templates/) | State, session and handoff templates for the hub |
 | [`CLAUDE.md`](CLAUDE.md) | How Claude should work in this repo, including what may and may not be published |
 
