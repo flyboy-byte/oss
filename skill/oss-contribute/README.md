@@ -11,8 +11,8 @@ the scarce resource, and PRs land when they are small, clearly right, proven by 
 up honestly. AI makes careless PRs cheap, and projects notice. The skill makes Claude work the
 careful way:
 
-- **Is AI welcome here?** Reads the project's contributing rules and AI policy first, and stops if
-  AI contributions are banned.
+- **Knows the project.** Reads its contributing rules and what it says about AI first, and tells
+  you what it found; you decide.
 - **Don't duplicate.** Searches open and merged PRs right before starting and before each push,
   and claims work the way the project wants.
 - **Reproduce, then fix.** Shows the bug first; smallest change, one topic per PR.

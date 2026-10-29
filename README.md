@@ -41,7 +41,7 @@ small, clearly right, proven by tests and written up honestly. AI makes careless
 projects notice.
 
 [`oss-contribute`](skill/oss-contribute/) is a [Claude Code](https://claude.com/claude-code)
-skill that holds Claude to that bar. It checks the AI policy before starting, searches for
+skill that holds Claude to that bar. It reads the project's rules first, searches for
 duplicate work, reproduces the bug first, proves each test fails without the fix, runs exactly
 what CI runs, keeps the PR in draft until the evidence is in, and asks before anything public.
 Around it, this repo keeps the **framework**: per-project state, session handoffs, a lessons
@@ -68,13 +68,13 @@ What has actually worked on real PRs, versus what is written down but not yet ex
 
 | | Piece | Notes |
 |---|---|---|
-| ✅ | **Core fix workflow** | Claim → reproduce → smallest fix → tests that fail without it → CI mirror → honest PR. Refined across all 21 merges. |
+| ✅ | **Core fix workflow** | Claim → reproduce → smallest fix → tests that fail without it → CI mirror → honest PR. Refined on real merged PRs. |
 | ✅ | **Review handling** | Human and bot reviews verified before applying; no pushes after approval (learned from a merge queue). |
 | ✅ | **Repo profiles** | `solidcraft`, `solidcore`, `cadcraft`: claim rules, CI commands, non-negotiables. Built from real PRs. |
-| ✅ | **Kernel bug → regression fixture** | Turning a CAD-kernel issue into a solidcore test with a closed-form expected answer. Used on several merged solidcore PRs. |
+| ✅ | **Kernel bug → regression fixture** | Turning a CAD-kernel issue into a solidcore test with a closed-form expected answer. Used on real solidcore PRs. |
 | ✅ | **Resuming and handoffs** | Read order, a NOW board, first commands and a [handoff template](templates/handoff.md). Used to restart long sessions after context compaction. |
 | 🚧 | **Small repos, GitLab, Codeberg, email patches, DCO/CLA** | Written in [`workflows.md`](skill/oss-contribute/reference/workflows.md). Not yet used outside GitHub. |
-| 🚧 | **pcbcraft** | Profile stub only. GPL-3.0, unlike its siblings, so it gets its own licence rules. |
+| 🚧 | **pcbcraft** | Profile stub only. GPL-3.0, unlike its siblings. |
 
 ---
 
@@ -85,7 +85,7 @@ Two loops. The inner one is a single contribution; the outer one is how the skil
 ```
   ONE CONTRIBUTION                              REFINEMENT
   ────────────────                              ──────────
-  AI policy + licence ok?  ── no ──▶ stop       real PR, real review
+  read the project's rules                      real PR, real review
           │                                            │
   pick a triaged issue, search for dupes               ▼
           │                                     something went wrong ─▶ LESSONS.md

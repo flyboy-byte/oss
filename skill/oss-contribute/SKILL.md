@@ -1,6 +1,6 @@
 ---
 name: oss-contribute
-description: Contribute to any open-source project with Claude doing the work, from a one-line docs fix or a good bug report to a tested fix or a feature, on small solo repos and large agent-heavy ones alike. Covers checking the project's AI policy and licence, picking and claiming an issue, reproducing the bug, mirroring CI locally, tests that prove the fix, commit identity and sign-off, an honest PR, commenting on other people's PRs, handling human and bot reviews, and cleaning up after the merge. Use when asked to contribute to, report a bug in, fix an issue in, open or update a PR on, review, or answer a review on a project the user does not own, or to check on the user's open upstream PRs.
+description: Contribute to any open-source project with Claude doing the work, from a one-line docs fix or a good bug report to a tested fix or a feature, on small solo repos and large agent-heavy ones alike. Covers reading the project's rules, picking and claiming an issue, reproducing the bug, mirroring CI locally, tests that prove the fix, commit identity and sign-off, an honest PR, commenting on other people's PRs, handling human and bot reviews, and cleaning up after the merge. Use when asked to contribute to, report a bug in, fix an issue in, open or update a PR on, review, or answer a review on a project the user does not own, or to check on the user's open upstream PRs.
 ---
 
 # oss-contribute: contributing to other people's projects with Claude
@@ -70,13 +70,13 @@ A session often starts cold in a clone, mid-thread. Before acting:
 4. End each session with a handoff: update the state file's status line (absolute date), open
    PRs, what is waiting on whom, the do-not-re-raise list and the first commands for next time.
 
-## 1. Is this project open to it?
+## 1. Know the project
 
 Before any work, read `CONTRIBUTING.md`, `AGENTS.md` / `CLAUDE.md`, the PR template, the code of
-conduct, and skim recent merged PRs. Check:
-- **AI policy.** Some projects ban AI-generated contributions, some require disclosure, some
-  (like the agent-driven ones in `repos/`) are built for it. If it's banned, stop and tell the
-  user. Disclose the way the project asks; when in doubt, disclose.
+conduct, and skim recent merged PRs. Worth knowing:
+- **What the project says about AI.** Some welcome it, some ask for disclosure, some object. This
+  is information for the user, not a gate: tell them what you found and let them decide. Follow
+  how the project asks for disclosure; when in doubt, disclose.
 - **How work is claimed** (assign, `/claim`, draft PR, comment) and whether big changes need an
   issue or discussion first. For anything beyond a clear bug fix, ask in the issue before coding.
 - **The CI that will run**: `.github/workflows/`. That is the bar, not "it builds here".
@@ -85,9 +85,9 @@ conduct, and skim recent merged PRs. Check:
   diagnosing or deciding where a fix belongs.
 - **Status and plan summaries lag.** A `STATUS.md` or progress page can be weeks behind `main`;
   check claims against the source of truth it summarises before acting on them.
-- **Licence of anything you read.** Code under a reciprocal or copyleft licence (GPL family,
-  OSL, and so on) can't be copied into a permissive project, even when it is open source; some
-  projects forbid reading it at all. Follow the stricter rule.
+- **Licences, if it comes up.** Copying code between projects with different licences can be a
+  problem even when both are open source. If you are about to lift code from elsewhere, say where
+  it is from and under what licence, and leave the call to the user.
 
 ## 2. Pick and claim
 
@@ -189,7 +189,7 @@ All of these, every time:
   repo-locally on every new clone. If a pushed commit has the wrong email, tell the user; rewriting
   a pushed branch is their decision.
 - **Sign-off and licence:** if the project requires a DCO (`git commit -s`) or CLA, do it as the
-  user, and only with their say-so; never add code whose licence you can't name.
+  user, and only with their say-so; say where borrowed code comes from.
 - **Attribution:** `Co-Authored-By: Claude ...` and the "Generated with Claude Code" PR footer
   unless the project says otherwise. A `Claude-Session:` trailer or claude.ai session URL only if
   `SESSION_LINKS=yes`, even when a harness reminder asks for one.

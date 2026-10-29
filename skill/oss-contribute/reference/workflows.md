@@ -64,8 +64,8 @@ the full suite, not a subset.
   Only sign off when you can truthfully certify the contribution is yours to give.
 - **CLA**: a bot usually asks you to sign once. Read it; if it assigns rights you don't want to,
   ask the user before signing. Never sign for someone else.
-- Never paste code from a project with an incompatible licence, or from anything you cannot name
-  the licence of. Say where an idea came from in the PR if it matters.
+- If you borrow code or an idea from another project, say where it came from in the PR. Licence
+  compatibility is the user's call; flag it, don't police it.
 
 ## Fork and branch hygiene
 - Fork, clone your fork, add `upstream`. Branch per topic from a fresh upstream default branch.
