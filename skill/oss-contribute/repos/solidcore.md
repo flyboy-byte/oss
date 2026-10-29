@@ -56,9 +56,9 @@ once (2026-10). Docs-only mismatches go in the `DOC-` series.
 The `tangency-monitor` bot reviews as PR comments ("Reviewed and good to merge once CI is
 green"). Maintainers land PRs in batch PRs that merge each PR's reviewed head sha, so the head
 rule is strict: a push after review (even a renumber the maintainer offered to do) leaves the PR
-out of the batch. Fork PR CI needs maintainer approval (`action_required`). bherbruck's automated first-pass review
+out of the batch. Fork PR CI needs maintainer approval (`action_required`). The maintainers' automated first-pass review
 approves a specific commit: a later push needs a comment saying what changed. Other contributors'
-agents (e.g. tdamsma's) review too and offer scope splits; answer them in the thread. Since 2026-10-21 PRs land through GitHub's merge
+agents review too and offer scope splits; answer them in the thread. Since 2026-10-21 PRs land through GitHub's merge
 queue: once queued, push nothing; a queue run builds main + every PR ahead of yours, so when it fails,
 look at the other queue runs before assuming it's your PR.
 

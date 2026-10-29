@@ -1,7 +1,7 @@
 # tangency-labs/solidcraft
 
 Pure-Rust parametric CAD app. Agent-driven: contributions by AI agents are expected. Remotes:
-`origin` = upstream (read-only; the repo's docs still say `bherbruck/solidcraft`, which moved to
+`origin` = upstream (read-only; the repo's docs may still name its old owner, before it moved to
 tangency-labs in 2026-10), `fork` = your fork. Read `AGENTS.md` each time: it is long and changes
 often. If the checkout has `skills/solidcraft-contributing/SKILL.md`, read it too: it is the
 maintainers' own contributing skill and outranks these notes.
@@ -12,7 +12,7 @@ tangency-labs/solidcore is evaluated: no new kernel issues, PRs or discussions. 
 reproduction goes into solidcore's regression suite as a fixture instead (`repos/solidcore.md`,
 "SolidCraft kernel bugs as fixtures"). Check which kernel a code path uses before diagnosing.
 
-## Where outside help fits (maintainers, Discord #contributing, 2026-10-27)
+## Where outside help fits (maintainers, the project's contributing channel, 2026-10-27)
 One-off bugs (not part of a larger issue) that a triager has already commented on; and kernel
 reproductions as solidcore fixtures. Not triage or duplicate-hunting (automated and covered), and
 not kernel direction or backends.

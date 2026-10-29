@@ -8,7 +8,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude%20Code-skill-d97757" alt="Claude Code skill">
-  <img src="https://img.shields.io/badge/merged%20upstream-16%20PRs-2ea44f" alt="16 merged upstream PRs">
+  <img src="https://img.shields.io/badge/merged%20upstream-21%20PRs-2ea44f" alt="21 merged upstream PRs">
   <img src="https://img.shields.io/badge/focus-tangency--labs-6f42c1" alt="Current focus: tangency-labs">
   <img src="https://img.shields.io/badge/scope-any%20OSS%20project-informational" alt="Scope: any open-source project">
   <img src="https://img.shields.io/badge/license-MIT-informational" alt="MIT">
@@ -19,6 +19,7 @@
   <a href="#whats-proven"><b>What's proven</b></a> •
   <a href="#how-it-works"><b>How it works</b></a> •
   <a href="#install"><b>Install</b></a> •
+  <a href="#contribute"><b>Contribute</b></a> •
   <a href="#whats-in-the-repo"><b>Layout</b></a>
 </p>
 
@@ -55,7 +56,7 @@ All written with Claude Code; the skill grew out of them and was refined on each
 | Project | What it is | Merged | Examples |
 |---|---|:---:|---|
 | [**solidcore**](https://github.com/tangency-labs/solidcore/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Rust port of NVIDIA's SMLib B-rep kernel | **11** | uninitialised Jacobian upstream ([#258](https://github.com/tangency-labs/solidcore/pull/258)), fillet corner setback ([#1193](https://github.com/tangency-labs/solidcore/pull/1193)) |
-| [**solidcraft**](https://github.com/tangency-labs/solidcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Parametric 3D CAD app in pure Rust | **4** | chamfer manipulator ([#2856](https://github.com/tangency-labs/solidcraft/pull/2856)), negative drag arrows ([#5508](https://github.com/tangency-labs/solidcraft/pull/5508)) |
+| [**solidcraft**](https://github.com/tangency-labs/solidcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Parametric 3D CAD app in pure Rust | **9** | chamfer manipulator ([#2856](https://github.com/tangency-labs/solidcraft/pull/2856)), negative drag arrows ([#5508](https://github.com/tangency-labs/solidcraft/pull/5508)) |
 | [**cadcraft**](https://github.com/storytold/cadcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Clean-room 2D CAD/drafting app in Rust | **1** | bare system variable runs SETVAR ([#799](https://github.com/storytold/cadcraft/pull/799)) |
 | [**pcbcraft**](https://github.com/tangency-labs/pcbcraft) | MCP-first Rust EDA, KiCad-compatible | **0** | not started: a profile stub, nothing contributed yet |
 
@@ -67,11 +68,11 @@ What has actually worked on real PRs, versus what is written down but not yet ex
 
 | | Piece | Notes |
 |---|---|---|
-| ✅ | **Core fix workflow** | Claim → reproduce → smallest fix → tests that fail without it → CI mirror → honest PR. Refined across all 16 merges. |
+| ✅ | **Core fix workflow** | Claim → reproduce → smallest fix → tests that fail without it → CI mirror → honest PR. Refined across all 21 merges. |
 | ✅ | **Review handling** | Human and bot reviews verified before applying; no pushes after approval (learned from a merge queue). |
 | ✅ | **Repo profiles** | `solidcraft`, `solidcore`, `cadcraft`: claim rules, CI commands, non-negotiables. Built from real PRs. |
-| 🚧 | **Kernel bug → regression fixture** | Turning a CAD-kernel issue into a solidcore test with a closed-form expected answer. First PR is in review. |
-| 🚧 | **Resuming and handoffs** | Read order, first commands and a [handoff template](templates/handoff.md). New; not yet tested by a cold session. |
+| ✅ | **Kernel bug → regression fixture** | Turning a CAD-kernel issue into a solidcore test with a closed-form expected answer. Used on several merged solidcore PRs. |
+| ✅ | **Resuming and handoffs** | Read order, a NOW board, first commands and a [handoff template](templates/handoff.md). Used to restart long sessions after context compaction. |
 | 🚧 | **Small repos, GitLab, Codeberg, email patches, DCO/CLA** | Written in [`workflows.md`](skill/oss-contribute/reference/workflows.md). Not yet used outside GitHub. |
 | 🚧 | **pcbcraft** | Profile stub only. GPL-3.0, unlike its siblings, so it gets its own licence rules. |
 
@@ -164,6 +165,25 @@ disagrees with the general rules, the profile wins.
 
 ---
 
+## Contribute
+
+> [!TIP]
+> **Anything is welcome**, from a typo to a new workflow. You don't need to be an expert or to
+> have merged a PR anywhere. Half-finished is fine; open a draft.
+
+| You have... | Go to |
+|---|---|
+| A mistake your agent made, and what fixed it | add it to [`LESSONS.md`](LESSONS.md) |
+| A workflow that worked more than once | [`PLAYBOOK.md`](PLAYBOOK.md), under "Being tried" |
+| A project you contribute to | a profile in [`skill/oss-contribute/repos/`](skill/oss-contribute/repos/) |
+| A step in the skill that is wrong or missing | a PR, or an issue if unsure |
+| A question or "this didn't work for me" | an [issue](https://github.com/flyboy-byte/oss/issues/new/choose) |
+
+Details, and what makes a PR land, are in [`CONTRIBUTING.md`](CONTRIBUTING.md). Changes to
+`SKILL.md` are read line by line, because they change how every user's agent behaves.
+
+---
+
 ## What's in the repo
 
 | Path | What it is |
@@ -172,6 +192,7 @@ disagrees with the general rules, the profile wins.
 | [`PLAYBOOK.md`](PLAYBOOK.md) | Workflows still being proven, before they move into the skill |
 | [`LESSONS.md`](LESSONS.md) | The lessons inbox: each mistake, and where in the skill it was fixed |
 | [`templates/`](templates/) | State, session and handoff templates for the hub |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md), [`.github/`](.github/) | How to contribute, the PR template and issue templates |
 | [`CLAUDE.md`](CLAUDE.md) | How Claude should work in this repo, including what may and may not be published |
 
 Live per-project state and session logs stay local: `.gitignore` is an allowlist, so nothing
