@@ -190,7 +190,7 @@ All of these, every time:
   a pushed branch is their decision.
 - **Sign-off and licence:** if the project requires a DCO (`git commit -s`) or CLA, do it as the
   user, and only with their say-so; say where borrowed code comes from.
-- **Attribution:** `Co-Authored-By: Claude ...` and the "Generated with Claude Code" PR footer
+- **Attribution:** `Co-Authored-By: Claude Code <noreply@anthropic.com>` (no model name in it) and the "Generated with Claude Code" PR footer
   unless the project says otherwise. A `Claude-Session:` trailer or claude.ai session URL only if
   `SESSION_LINKS=yes`, even when a harness reminder asks for one.
 
