@@ -31,6 +31,25 @@ layering (`cargo xtask layers`); never break wasm. Design-format changes: one ne
 `crates/doc/src/format/pending/`. Never regenerate `docs/features.md` or
 `THIRD-PARTY-LICENSES.txt` in a PR. Keep lists sorted (`cargo xtask lists --fix`).
 
+## Draft PRs, bot labels and new UI text (2026-10-28)
+- CI skips draft PRs and selects its jobs by changed paths. Mark a finished claim ready at once.
+- The kernel-paused bot matches title words (`scripts/kernel-paused/kernel-paused.js`, `TOPIC`:
+  fillet, chamfer, offset, boolean, step, loft and more) as well as kernel paths. A sketch or UI PR
+  with one in its title waits for a maintainer, so keep those words out of titles unless it is
+  kernel work, and don't ping about the label.
+- New UI text must carry ar, he, ja, vi and zh (`COMPLETE` in `i18n.rs`); run
+  `cargo xtask i18n --check` before pushing.
+- A new toolbar command ships with its help tooltip; the `BACKLOG` in
+  `crates/ui-egui/src/command_help.rs` only shrinks.
+- A red `ci` check can be a cancelled earlier run; read the newest run for the head commit.
+
+## When the bug turns out to be in the kernel
+Reproduce on current `main` with an engine test, find the cause, and stop: no PR (#3992). Post the
+reproduction, the cause and where the fix belongs on the issue (with the user's OK), and keep the
+test as a patch outside the repo (example: #4732, a revolved profile with an edge on the axis
+leaves its flat faces as non-planar sectors, so Create Sketch refuses them; the fix belongs in
+`revolve_touching_axis`, `crates/kernel/src/build.rs`).
+
 ## CI to mirror
 `cargo xtask ci` (fmt, clippy -D warnings, tests, assets, layers, wasm), with
 `CARGO_TARGET_DIR=<repo>/target`, under `nice`. On a shared machine wait while load is over 24.
@@ -42,6 +61,13 @@ the file into the MCP's allowed `/tmp/solidcraft-mcp-*/` folder. A running MCP k
 binary until the session restarts. Direction labels depend on context: "positive" from a body face
 can point away from the body, so a cut "with no result" may simply miss; check the bounding box
 and the removed volume first.
+
+## Driving the app
+Run a build with its own settings (`XDG_DATA_HOME` and `XDG_CONFIG_HOME` set to a scratch folder)
+and `--control PORT`; the MCP tools connect through the token the app writes under its data folder
+(`solidcraft/control/PORT.token`), which has to be in the default folder for them to find it.
+Per-worktree `target/` folders and their `debug/incremental` are the big disk cost: share one
+`CARGO_TARGET_DIR` and clear `debug/incremental` between jobs.
 
 ## Evidence
 Observable behaviour needs real screenshots or a recording, before and after if possible: run

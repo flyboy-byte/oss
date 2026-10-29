@@ -50,7 +50,9 @@ expected; see step 1. Keep `me.md` for the user's notes: their clones, open PRs,
 Public writes are the user's to approve one by one: commenting, editing a PR or issue, marking
 ready, pushing, forking. Some harnesses block them unless the user has said "do it" for that
 action; when they haven't, ask, or give them the exact command to run themselves (in Claude Code,
-`! <command>`). Earlier approval doesn't carry over to the next write.
+`! <command>`). Earlier approval doesn't carry over to the next write. If a write is blocked and
+the user then says "do it" for that exact action, try it once more as written; if it is blocked
+again, give them the command and stop. Never reword or reroute it to get past a block.
 
 ## Resuming
 
@@ -93,6 +95,12 @@ conduct, and skim recent merged PRs. Check:
 - In a fast-moving repo, right before starting **and again before every push**: search open and
   merged PRs and recent `main` commits for the issue number and its keywords
   (`contrib-check.sh --no-ci <keywords>`). Fixes often land without mentioning the issue.
+- **Read the whole thread before you pick.** An open issue is not an open bug. Maintainers often
+  write "fixed on main by #N" or "by design, can be closed" and nobody closes the issue. Of four
+  candidates taken from a label search, two were already fixed, one was by design and one was
+  claimed. Read every comment and check that the PR it names is merged. If it is already fixed,
+  the useful output is a short "looks ready to close" comment (with the user's OK, saying you did
+  not retest), not a PR.
 - Claim the way the project says. If someone else already has it, leave it or ask on the issue.
 - **Stay inside the issue's scope.** Fix what the issue reports and nothing broader; a wider
   cleanup you noticed is a separate issue, raised in the thread first. A PR is not worth opening
@@ -104,11 +112,26 @@ conduct, and skim recent merged PRs. Check:
 
 - **Reproduce first, on a fresh `main`.** Show the bug happening (a failing test, a command, a
   screenshot) before you change anything. If you can't reproduce it, say so on the issue instead
-  of guessing. A result from an older commit is not a finding; the bug may already be gone.
+  of guessing. A result from an older commit is not a finding; the bug may already be gone. An
+  installed release or AppImage is not `main` either: for anything that will back a claim, build
+  the newest `origin/main` or use the latest release, and name the commit or version next to the
+  result.
+- **Check the repro hits the case you mean.** Print what the code sees (which face or object,
+  which point, the distance) before trusting a failure. A test can fail for a wrong sign or axis
+  (a sketch plane whose second axis points down) and look exactly like the reported bug.
 - **Know the right answer independently.** For numeric or geometric results, work out the
   expected value another way (closed form, a second method, a hand count) before trusting any
   tool's output, including the project's. Measure before concluding "nothing happened": a no-op
-  is often a wrong input (direction, units, sign), not a missing feature.
+  is often a wrong input (direction, units, sign), not a missing feature. A triager's "reproduced"
+  covers the failure, not the cases that seem to work: measure those against the right answer too.
+  In one offset bug the failure began past a size, but the results below it were also wrong, so a
+  fix for the threshold alone would have kept wrong geometry and the real fix became a design
+  question for the maintainers.
+- **When the cause is in an area you may not change** (a paused or maintainer-owned component),
+  stop at the diagnosis. Reproduce on current `main` with a failing test, find where the cause is
+  and where the fix belongs, and with the user's OK post that on the issue. Keep the test out of
+  any PR. Don't patch a neighbouring layer to get past a rule that layer states (an "exact planar
+  face" check fed from a mesh test); it moves the bug and breaks the rule.
 - Smallest change that fixes the problem. One topic per PR. Don't reformat, rename or "tidy"
   code you weren't asked to touch; don't add dependencies without asking.
 - Follow the project's conventions over your own: its error handling, naming, test layout, docs.
@@ -129,11 +152,15 @@ conduct, and skim recent merged PRs. Check:
 - Never "fix" a failing test by weakening it, and never skip or delete tests to get green.
 - Kill processes you started by exact PID; `pkill -f` patterns can match your own shell.
 
-## Pace: draft until it's proven
+## Pace: draft until the evidence is in
 
 Claim with a draft PR and keep it draft until the evidence is in the body: the reported failure
 reproduced and fixed, every part covered, the neighbourhood swept, reachability stated, CI's
-commands run. Marking a PR ready an hour after claiming is a warning sign, not a win.
+commands run. Then mark it ready at once. The gate is the evidence, not the clock: a PR that goes
+from claim to ready in an hour with the evidence in its body is fine (one was queued by a
+maintainer the same evening); one with no evidence after a day is not. A finished claim left as a
+draft hides the work from reviewers, and some projects' CI skips drafts, so nothing has been
+checked upstream until it is ready.
 
 In agent-heavy repos everyone can produce a plausible fix in minutes, so quick fixes are cheap and
 quality is what stands out. Before marking ready, audit your own PR as a reviewer would: re-read
@@ -177,6 +204,10 @@ All of these, every time:
   A fork contributor can't re-run a failed job either ("Must have admin rights"); only a
   maintainer can. Push a fix if the failure is yours; if it looks like a flake in code you didn't
   touch, say so with the evidence and leave the re-run to them.
+- **A red check from a cancelled run is not a failure.** A push or a label change starts a new CI
+  run and cancels the old one, whose summary check can stay red beside the new green one (and the
+  notification email says "failed"). Find the newest run for the head commit and read that; only a
+  failure in it counts.
 - Read a failing job narrowly: `gh run view <id> --log-failed` repeats the step command many
   times, so grep for the test name, `panicked`, `FAILED` or `error` instead of reading it whole.
 
@@ -190,6 +221,9 @@ All of these, every time:
   batch merges are often tied to the reviewed commit, and a later push (even a tidy-up the
   maintainer offered to do themselves) can drop the PR from the merge. Suggest the change in a
   comment and let them choose.
+- A maintainer can queue a PR for merge at any moment, often right after CI goes green. Labels
+  like "ready to merge", auto-merge enabled or an "added to merge queue" event mean the head is
+  frozen: push nothing until it merges or is dropped.
 - If you do push after an approval (a reviewer asked for it), say so at once in a comment: which
   commit the approval covers, what the new commit changes, and what you ran on it.
 - Don't push just to catch up with `main`; every push re-runs CI. Sync (merge or rebase, per the
@@ -230,8 +264,12 @@ what the diff says, or filling a quiet thread.
 ## 7. After the merge
 
 - Confirm with `gh pr view N --json state,mergedAt`; never report a merge you didn't check.
-- Clean up local branches and build dirs only with the user's OK on the exact list, after checking
-  the commits are in a freshly fetched `origin/main`.
+- Clean up local branches, worktrees and build dirs only with the user's OK on the exact list,
+  after checking the commits are in a freshly fetched `origin/main`. A squash merge leaves the
+  branch looking unmerged; check the PR state, not `git branch --merged`. Save any uncommitted
+  scratch you may want again (a patch file) before removing a worktree.
+- Your own old issue: when later changes make it stale and you cannot retest it, close it as not
+  planned and say why, including that you did not retest. Don't write that it is fixed.
 - When there is nothing open and nothing is waiting on you, stop. Check back on threads you
   commented on, answer anyone who asks you something, and take new work only when there is a
   real issue to fix, not to keep a count going.
@@ -249,7 +287,10 @@ decision on their project; touch another Claude session's PRs or clones.
 - `git fetch origin` before trusting any count or "is it merged" answer. (`git fetch origin fork`
   is a different command: it treats `fork` as a refspec, fails and leaves `origin/main` stale.)
 - Build under `nice` and check load first if the machine is shared. Check free disk before a big
-  build; big Rust and C++ projects reach tens of GB of build output.
+  build; big Rust and C++ projects reach tens of GB of build output. With several worktrees of one
+  Rust repo, share one `CARGO_TARGET_DIR`, but note that each worktree path still gets its own
+  `debug/incremental` folder (tens of GB): clear it between jobs or build with
+  `CARGO_INCREMENTAL=0`.
 - Ask tools for narrow answers. Full topology dumps, command catalogues and big JSON reports eat
   context; query the one field you need.
 - Conflicts in shared lists or changelogs: keep everyone else's entries, add yours.

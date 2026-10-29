@@ -24,16 +24,23 @@ through with where it went, not deleted.
 - ~~**Fork contributors can't re-run CI; read failed logs narrowly.**~~ SKILL.md section 5
   (2026-10-28, from #1373's second run).
 - **zsh:** quote `=====` and globs (`--include='*.rs'`). Not in the skill: shell-specific.
-- **A triager's "reproduced" covers the failure, not the cases that seem to work.** Before
-  designing a fix, measure the working cases against the right answer too. In one sketch-offset
-  bug the report was a failure past a size threshold, but the offsets below it that succeeded were
-  also joined at the wrong point, so a fix for the threshold alone would have kept wrong geometry
-  and the real fix became a design question for the maintainers.
-- **A claim draft is not the finished state.** Where a project claims issues by opening a draft
-  PR, mark it ready as soon as the code and tests are done; leaving it a draft hides finished work
-  from reviewers, and some projects' CI skips drafts entirely, so nothing has been checked
-  upstream until it is ready.
-- **A red check from a cancelled run is not a failure.** When a push or a label change starts a
-  new CI run, the old one is cancelled and its summary check can stay red on the PR beside the new
-  green one. Before reacting to a red check, find the newest run for the head commit and read that;
-  only a failure in it counts.
+- ~~**A triager's "reproduced" covers the failure, not the cases that seem to work.**~~ SKILL.md
+  section 3, "Know the right answer independently" (folded 2026-10-29).
+- ~~**A claim draft is not the finished state.**~~ SKILL.md "Pace: draft until the evidence is in"
+  (folded 2026-10-29, which also replaces the "an hour after claiming is a warning sign" line).
+- ~~**A red check from a cancelled run is not a failure.**~~ SKILL.md section 5 (folded 2026-10-29).
+- ~~**An open issue is not an open bug.**~~ SKILL.md section 2, "Read the whole thread before you
+  pick" (2026-10-29: of four label-search picks, two were already fixed, one by design, one
+  claimed).
+- ~~**A failing test is not yet a reproduction.**~~ SKILL.md section 3, "Check the repro hits the
+  case you mean" (2026-10-29: a wrong sign on a sketch plane's second axis made the first test fail
+  for the wrong reason; printing the distance showed it).
+- ~~**Stop at the diagnosis when the fix is in a paused or foreign area.**~~ SKILL.md section 3,
+  "When the cause is in an area you may not change" (2026-10-29).
+- ~~**An installed build is not `main`.**~~ SKILL.md section 3, "Reproduce first" (2026-10-29: app
+  screenshots from an older installed release were taken for current behaviour).
+- ~~**A blocked write plus an explicit "do it".**~~ SKILL.md "First run" (2026-10-29): retry once as
+  written, then give the command; never reword to get past a block.
+- ~~**A PR can be queued without warning.**~~ SKILL.md section 6, head rule (2026-10-29).
+- ~~**Parallel worktrees multiply incremental build output.**~~ SKILL.md "Git habits" and
+  `repos/solidcraft.md` (2026-10-29: 26 GB regrown within a day).

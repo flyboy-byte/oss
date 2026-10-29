@@ -89,6 +89,13 @@ if [ "$SESSION_LINKS" != "yes" ]; then
   [ -n "$links" ] && { echo "SESSION LINK in commit messages (SESSION_LINKS=no):"; echo "$links"; }
 fi
 
+if [ "$SESSION_LINKS" != "yes" ] && command -v gh >/dev/null 2>&1; then
+  body=$(gh pr view --json body --jq .body 2>/dev/null || true)
+  if printf '%s' "$body" | grep -qi 'claude.ai/code/session'; then
+    echo "SESSION LINK in this branch's PR description (SESSION_LINKS=no): edit the PR body to remove it"
+  fi
+fi
+
 echo "== possible duplicates (open and merged PRs)"
 if [ "${#keywords[@]}" -eq 0 ]; then
   echo "no keywords given; pass the issue number and a few words"
