@@ -27,7 +27,8 @@
 
 > [!NOTE]
 > **Built on a few big projects first, aimed at all of them.** Right now the work happens in
-> [tangency-labs](https://github.com/tangency-labs) (SolidCraft, solidcore, pcbcraft) and
+> [tangency-labs](https://github.com/tangency-labs) (SolidCraft, solidcore),
+> [wdunn001/pcbcraft](https://github.com/wdunn001/pcbcraft) and
 > [storytold/cadcraft](https://github.com/storytold/cadcraft): large, fast-moving Rust CAD/EDA
 > projects where many people and agents open PRs every day. That's the hardest setting, so it's
 > where the rules get tested. Everything general goes into the skill, which is written for
@@ -58,7 +59,7 @@ All written with Claude Code; the skill grew out of them and was refined on each
 | [**solidcore**](https://github.com/tangency-labs/solidcore/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Rust port of NVIDIA's SMLib B-rep kernel | **11** | uninitialised Jacobian upstream ([#258](https://github.com/tangency-labs/solidcore/pull/258)), fillet corner setback ([#1193](https://github.com/tangency-labs/solidcore/pull/1193)) |
 | [**solidcraft**](https://github.com/tangency-labs/solidcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Parametric 3D CAD app in pure Rust | **9** | chamfer manipulator ([#2856](https://github.com/tangency-labs/solidcraft/pull/2856)), negative drag arrows ([#5508](https://github.com/tangency-labs/solidcraft/pull/5508)) |
 | [**cadcraft**](https://github.com/storytold/cadcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Clean-room 2D CAD/drafting app in Rust | **1** | bare system variable runs SETVAR ([#799](https://github.com/storytold/cadcraft/pull/799)) |
-| [**pcbcraft**](https://github.com/tangency-labs/pcbcraft) | MCP-first Rust EDA, KiCad-compatible | **0** | not started: a profile stub, nothing contributed yet |
+| [**pcbcraft**](https://github.com/wdunn001/pcbcraft) | MCP-first Rust EDA, KiCad-compatible | **0** | not started: the profile has the project's rules (its own claim format, no AI attribution lines), nothing contributed yet |
 
 ---
 
@@ -74,7 +75,7 @@ What has actually worked on real PRs, versus what is written down but not yet ex
 | ✅ | **Kernel bug → regression fixture** | Turning a CAD-kernel issue into a solidcore test with a closed-form expected answer. Used on real solidcore PRs. |
 | ✅ | **Resuming and handoffs** | Read order, a NOW board, first commands and a [handoff template](templates/handoff.md). Used to restart long sessions after context compaction. |
 | 🚧 | **Small repos, GitLab, Codeberg, email patches, DCO/CLA** | Written in [`workflows.md`](skill/oss-contribute/reference/workflows.md). Not yet used outside GitHub. |
-| 🚧 | **pcbcraft** | Profile stub only. GPL-3.0, unlike its siblings. |
+| 🚧 | **pcbcraft** | Profile written from the project's contributor guide; nothing contributed yet. GPL-3.0, and its rules differ from the siblings (no AI attribution lines, its own claim format). |
 
 ---
 

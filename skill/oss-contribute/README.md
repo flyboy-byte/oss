@@ -64,7 +64,7 @@ MAX_OPEN_PRS=3
 `repos/<name>.md` holds one project's rules (claim style, CI commands, merge-or-rebase, review
 bots, files every PR conflicts on); `repos/<name>.env` feeds the check script. The included ones
 are agent-driven Rust projects (`tangency-labs/solidcraft`, `tangency-labs/solidcore`,
-`storytold/cadcraft`, and a stub for `tangency-labs/pcbcraft`); `repos/_template.md` starts a new one. For any other repo Claude builds a profile on first use, following
+`storytold/cadcraft`, and `wdunn001/pcbcraft`, whose rules differ: no AI attribution lines, its own claim format); `repos/_template.md` starts a new one. For any other repo Claude builds a profile on first use, following
 `reference/new-repo.md`.
 
 ## The check script on its own

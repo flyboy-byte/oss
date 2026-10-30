@@ -4,7 +4,9 @@ Pure-Rust parametric CAD app. Agent-driven: contributions by AI agents are expec
 `origin` = upstream (read-only; the repo's docs may still name its old owner, before it moved to
 tangency-labs in 2026-10), `fork` = your fork. Read `AGENTS.md` each time: it is long and changes
 often. If the checkout has `skills/solidcraft-contributing/SKILL.md`, read it too: it is the
-maintainers' own contributing skill and outranks these notes.
+project's own contributing skill, written for first-time contributors. It is a second source, not a
+boss: where it and these notes differ, check `AGENTS.md`, `CONTRIBUTING.md` and recent merged PRs
+for what is current, and tell the user. Refined copies of parts of it are at the bottom of this file.
 
 ## Kernel (2026-10-27)
 The kernel on `main` is truck (`crates/kernel` only). Kernel work is paused (#3992) while
@@ -89,3 +91,87 @@ A queued PR can be removed with "failed_checks" when `main` moved under it (2026
 Rebase, never merge `main` in. Don't push only to catch up with `main`; when you push anyway or it
 conflicts, rebase onto `origin/main` and `--force-with-lease` your own branch. Don't re-run CI on
 an unchanged commit.
+
+---
+
+# From the project's own skills (refined copies, kept separate)
+
+Borrowed 2026-10-29 from `skills/` on `origin/main` d4fb5538 (`solidcraft-contributing`,
+`-reporting`, `-tests`, `-ground-rules`, `-crash-safety`), reworded and cut down. SolidCraft is
+Apache-2.0 (MIT OR Apache-2.0); the originals are the source, and they change, so read the
+current ones in a checkout. Nothing above this line was changed to match them. Marks: **new** =
+nothing like it in our notes; **same** = we already say it, listed so you can compare.
+
+## Contributing
+- **new:** before claiming, list open PRs with the files they change
+  (`gh pr list -R O/R --state open --limit 500 --json number,title,files`), not only a search for
+  the issue number. The same feature turns up under another number.
+- **new:** the gate reads the working tree. Don't switch branches while `cargo xtask ci` runs: it
+  compiles the other branch's code and fails on a change that isn't in your PR.
+- **new:** if your claim lost to a lower-numbered PR, close yours (ask the user first).
+- **new:** capture evidence yourself; don't ask a person for a screenshot you can make.
+  `solidcraft-cli snapshot script.json --out shot.png [--view iso]` renders a command script with
+  no display (it fails if a step fails, so snapshot the script without the failing step).
+- **new:** update `docs/roadmap-detail.md` when a milestone task lands.
+- **same:** claim by draft PR, daily pushes, `Changes a default:` line, don't push to catch up with
+  `main`, rebase and `--force-with-lease`, never merge `main` in, load check before a big build.
+
+## Reporting a bug (their `solidcraft-reporting`)
+- **new:** reproduce in a fresh design, not the user's file. Headless: write the steps as
+  `{"commands":[...]}` and `solidcraft-cli run repro.json` (a failing feature fails the run and
+  names it). Over MCP: `new_design`, then one `batch` with `rollback: false` so the steps before
+  the failure stay for inspection.
+- **new:** minimise while the same message still appears: drop steps from the end, then the middle;
+  swap sketches for `solid.box`/`solid.cylinder`; round the numbers; stop when removing more makes
+  it pass. Record the boundary ("fails at radius 5, works at 4.9").
+- **new:** cap runs that may hang (`timeout 120 solidcraft-cli run repro.json --timings`; a killed
+  run prints nothing, so run one step longer at a time). `batch` with `timings: true` times each step.
+- **new:** check the claim with a number: `measure` against a value worked out by hand, and put
+  both in the report. `body_topology` shows what was there to pick.
+- **new:** privacy: never attach or quote the user's design or a crash report's `design.sc` unless
+  they agreed; use a small public-safe example.
+- **new:** the title and body report what was observed ("the fillet fails with `...`"), never a
+  guessed cause. (Ours says this too; theirs makes it a template with Steps, Minimal script,
+  Expected, Actual, how often, Attachments.)
+- **new:** the report states the version it was written against; ask for it (Help, About, or
+  `solidcraft-cli --version`).
+
+## Tests (their `solidcraft-tests`)
+- **new:** a regression test goes in the area's existing test file, never a new file named after
+  the bug.
+- **new:** a UI scenario that records a bug before its fix carries `{"pending": "why"}`; remove it
+  in the fixing PR. A Rust test that fails until a fix lands is `#[ignore = "fails until #N is
+  fixed"]`. A failing test with no fix can't merge: it turns `main` red.
+- **new:** reference (oracle) tests: `tests/oracle/<case>/recipe.json` + `expected.json`, run by
+  `cargo xtask oracle`; expected values come from a closed form (`tools/oracle-analytic/`), never
+  by changing the expected value to match SolidCraft's output.
+- **new:** `cargo xtask test` uses the `ci` profile (debug assertions off on purpose: truck's
+  reject valid geometry). If a test fails only in a plain debug build, say so in the PR.
+  `SOLIDCRAFT_TEST_JOBS=N` bounds load on a shared machine.
+- **new:** PRs skip a few heavy tests that run in the merge queue and on `main`
+  (`.config/nextest.toml`); check them after the merge. Goldens: re-record in the same PR
+  (`ROBUSTNESS_GOLDENS_BLESS="why"`); the action matrix is a ratchet (`--bless`).
+
+## Never crash (their `solidcraft-crash-safety`)
+- **new, matters to us:** crashes and data loss are taken as issues **even while kernel work is
+  paused** (#3992, CONTRIBUTING "Kernel work is paused"). A reproducible crash on current `main`
+  isn't covered by our kernel-pause stop rule; check the issue first.
+- **new:** the app records every panic to a local crash folder. `solidcraft-cli crashes`,
+  `crashes show <id>`, `crashes replay <id>`, or the MCP `crash_reports` tool give version, command
+  and replay; a crash fix starts from that replay as its regression test.
+- **same:** no `unwrap`/`expect`/`panic`/`unsafe` in non-test code; errors are `Result`.
+
+## Ground rules (their `solidcraft-ground-rules`)
+- **same:** clean-room, no GPL/LGPL/AGPL reading, no commercial-CAD data, assets need an
+  ATTRIBUTION.md row.
+- **new:** the GPL oracle is run as a separate program through its public scripting API to compute
+  reference values (`tools/freecad-oracle/`); nothing is linked or shipped. Running a tool as a
+  black box differs from reading its source.
+- **new:** terms come from the glossary (`docs/book/src/reference/glossary.md`); a new idea adds its term.
+- **new:** the storytold projects are named as references for implementation conventions (relevant
+  when we look at cadcraft).
+
+## Not borrowed
+Their first-time-contributor script (check the environment, fork, show every public action to the
+person) is written for newcomers; it is the same job as our "ask before public writes" and the user's
+standing OKs, so it stays theirs.

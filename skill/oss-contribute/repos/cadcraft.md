@@ -41,3 +41,37 @@ Match merged #799: prose explaining the gap and what changed, then **Checked:**,
 - FredApps reviews and approves but has no write access, so `reviewDecision` stays empty even
   when approved. Treat their approval as an approval for the head rule.
 
+
+---
+
+# From the project's own instructions (refined copies, kept separate)
+
+storytold has no `skills/` folder in cadcraft or in the sibling repos checked (photocraft, pdfcraft,
+vectorcraft, artcraft, craft-libs, craft-contrib). Its guidance is `AGENTS.md` (`CLAUDE.md` holds the
+same text), read 2026-10-29 at cadcraft `main` 336243e0 (Apache-2.0 / MIT). It points at a shared
+`storytold/craftrules` repo for standards (never-crash, progress-docs); that repo is not public
+(404), so those standards are unread. Nothing above this line was changed. **new** = not in our
+notes; **same** = already there.
+
+- **new:** contributor credits. Check `contributors/people.toml` for a `[people.<username>]` entry
+  for the contributor. If there is none, ask them once whether they want a real name or display name
+  shown (About window); if yes, add only their own entry in their PR, if no change nothing. Never
+  add, edit or guess anyone else's entry; never hand-edit `contributors.json` (generated).
+- **new:** more of the never-crash standard: bound recursion (nested or cyclic block references,
+  `MAX_BLOCK_DEPTH`); every step of an interactive command runs under `catch_unwind`
+  (`crates/engine/src/guard.rs`); `hostile_dxf_does_not_panic` next to `hostile_params_never_panic`.
+- **new:** time goes through `chrono`; never hand-roll calendar or UTC conversion.
+- **new:** fonts live in `storytold/craft-fonts` and test corpora in `storytold/<app>-corpus`, never
+  in the repo; code and tests must work without them. Don't commit large binary fixtures.
+- **new:** `engine.execute` never opens a dialog; only menu or toolbar starts the interactive
+  prompt. `cmdline.input` types at the command line like a user.
+- **new:** headless pictures: `cadcraft-cli run --sample --script 'LINE 0,0 10,10\n' --export out.png`;
+  `cadcraft-cli info file.dxf`; `ui.render` when the screen is locked and no frame is presented.
+- **new:** parallel agents use separate `CARGO_TARGET_DIR`s and delete theirs when done; `mv` and
+  `cp` may be aliased interactive, use `/bin/mv -f` and `/bin/cp -f`.
+- **new, a difference to remember:** the maintainers observe the reference app black-box on their own
+  machine; a contributor has no such access, so use public specs only (DXF Reference, ODA's DWG spec).
+- **same:** clean-room, asset rows in ATTRIBUTION.md, layering, `cargo xtask ci`, work list in
+  `docs/gaps.md`.
+- **Not borrowed:** "commit and push to `main`", the `plan/` session protocol and "don't stop to ask":
+  those are the maintainers' own workflow, not a contributor's.

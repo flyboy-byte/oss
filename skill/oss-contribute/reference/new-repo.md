@@ -9,9 +9,13 @@ Do this once per repo, before the first contribution, and save the result as
 3. The last 10-20 merged PRs (`gh pr list -R O/R --state merged --limit 20`): size, body style,
    how they reference issues, who reviews, which bots comment, how long merges take.
 4. Open PRs and issues labelled for newcomers (`good first issue`, `help wanted`, `bug`).
-5. Search issues and discussions for "AI", "LLM", "Copilot", "Claude", "generated" for the policy.
+5. A pinned or "start here" issue, and whether the repo says it moved (`gh repo view O/R --json
+   description,isArchived`). Rules found there count loosely if a maintainer wrote them.
+6. Search issues and discussions for "AI", "LLM", "Copilot", "Claude", "generated" for the policy.
 
 ## Write down
+- **Overrides**: anything found that changes this skill's defaults (tracker location, claim
+  format, attribution, merge or rebase). Check it before the first commit.
 - **AI policy** and how to disclose.
 - **Claim** convention, and whether big changes need an issue first.
 - **Non-negotiables** (licensing, no panics, style rules, layering, assets).
