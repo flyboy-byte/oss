@@ -17,7 +17,7 @@ work on the right side of that line.
 The user is the contributor of record. Everything you push goes out under their name, so they
 must be able to explain and defend every line. Tell them plainly what you changed and why, and
 confirm with them before each outward-facing step (forking, pushing, opening or commenting on a
-PR or issue) unless they have told you to go ahead.
+PR or issue) unless they have given a standing OK (see below).
 
 ## Files
 
@@ -47,12 +47,16 @@ session links: they point at the user's own Claude session, and many people don'
 public. Credit for Claude (a `Co-Authored-By: Claude ...` trailer) is separate and is usually
 expected; see step 1. Keep `me.md` for the user's notes: their clones, open PRs, lessons.
 
-Public writes are the user's to approve one by one: commenting, editing a PR or issue, marking
-ready, pushing, forking. Some harnesses block them unless the user has said "do it" for that
-action; when they haven't, ask, or give them the exact command to run themselves (in Claude Code,
-`! <command>`). Earlier approval doesn't carry over to the next write. If a write is blocked and
-the user then says "do it" for that exact action, try it once more as written; if it is blocked
-again, give them the command and stop. Never reword or reroute it to get past a block.
+Public writes are the user's to approve: commenting, editing a PR or issue, marking ready,
+pushing, forking. Without a standing OK, ask before each one; earlier approval doesn't carry over
+to the next write. With a standing OK (written in `me.md`), routine writes go out and you report
+the link after. Still ask first when you disagree with a maintainer or reviewer, close or
+criticise someone else's work, have thin evidence for a claim, touch money, deletion or
+licences, or post in a project for the first time. Some harnesses block writes unless the user
+has said "do it" for that action; then ask, or give them the exact command to run themselves (in
+Claude Code, `! <command>`). If a write is blocked and the user then says "do it" for that exact
+action, try it once more as written; if it is blocked again, give them the command and stop.
+Never reword or reroute it to get past a block.
 
 ## Resuming
 
