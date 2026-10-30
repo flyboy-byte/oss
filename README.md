@@ -8,7 +8,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude%20Code-skill-d97757" alt="Claude Code skill">
-  <img src="https://img.shields.io/badge/merged%20upstream-21%20PRs-2ea44f" alt="21 merged upstream PRs">
+  <img src="https://img.shields.io/badge/merged%20upstream-25%20PRs-2ea44f" alt="25 merged upstream PRs">
   <img src="https://img.shields.io/badge/focus-tangency--labs-6f42c1" alt="Current focus: tangency-labs">
   <img src="https://img.shields.io/badge/scope-any%20OSS%20project-informational" alt="Scope: any open-source project">
   <img src="https://img.shields.io/badge/license-MIT-informational" alt="MIT">
@@ -56,8 +56,8 @@ All written with Claude Code; the skill grew out of them and was refined on each
 
 | Project | What it is | Merged | Examples |
 |---|---|:---:|---|
-| [**solidcore**](https://github.com/tangency-labs/solidcore/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Rust port of NVIDIA's SMLib B-rep kernel | **11** | uninitialised Jacobian upstream ([#258](https://github.com/tangency-labs/solidcore/pull/258)), fillet corner setback ([#1193](https://github.com/tangency-labs/solidcore/pull/1193)) |
-| [**solidcraft**](https://github.com/tangency-labs/solidcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Parametric 3D CAD app in pure Rust | **9** | chamfer manipulator ([#2856](https://github.com/tangency-labs/solidcraft/pull/2856)), negative drag arrows ([#5508](https://github.com/tangency-labs/solidcraft/pull/5508)) |
+| [**solidcore**](https://github.com/tangency-labs/solidcore/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Rust port of NVIDIA's SMLib B-rep kernel | **13** | uninitialised Jacobian upstream ([#258](https://github.com/tangency-labs/solidcore/pull/258)), fillet corner setback ([#1193](https://github.com/tangency-labs/solidcore/pull/1193)) |
+| [**solidcraft**](https://github.com/tangency-labs/solidcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Parametric 3D CAD app in pure Rust | **11** | chamfer manipulator ([#2856](https://github.com/tangency-labs/solidcraft/pull/2856)), negative drag arrows ([#5508](https://github.com/tangency-labs/solidcraft/pull/5508)) |
 | [**cadcraft**](https://github.com/storytold/cadcraft/pulls?q=is%3Apr+is%3Amerged+author%3Aflyboy-byte) | Clean-room 2D CAD/drafting app in Rust | **1** | bare system variable runs SETVAR ([#799](https://github.com/storytold/cadcraft/pull/799)) |
 | [**pcbcraft**](https://github.com/wdunn001/pcbcraft) | MCP-first Rust EDA, KiCad-compatible | **0** | not started: the profile has the project's rules (its own claim format, no AI attribution lines), nothing contributed yet |
 
