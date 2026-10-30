@@ -44,3 +44,20 @@ through with where it went, not deleted.
 - ~~**A PR can be queued without warning.**~~ SKILL.md section 6, head rule (2026-10-29).
 - ~~**Parallel worktrees multiply incremental build output.**~~ SKILL.md "Git habits" and
   `repos/solidcraft.md` (2026-10-29: 26 GB regrown within a day).
+- **A new test can pass on untouched `main`.** In a UI search fix, the first test used a helper
+  that finds a control whether or not it is drawn (hidden controls sit off screen but still
+  exist), so it passed with no fix at all, and again with half the fix removed. Run the new test on
+  unmodified `main` first and watch it fail with the reporter's message; assert on what the user
+  sees (drawn, on screen), not on what exists; then take the fix apart one piece at a time and see
+  a failure each time. (2026-10-30, solidcraft #9318.) Candidate for SKILL.md section 3, "Prove the
+  tests".
+- **Issues found by someone else's automation are candidates, not picks.** A list from another tool
+  or session went through the usual screen: a label like `kernel-paused` or an area tag drops an
+  issue in one read, a claim comment or an open PR that names the number drops another, and what
+  is left still gets the whole-thread read and a fresh-`main` repro. Of five listed, one was left.
+  (2026-10-30, solidcraft.)
+- **A long build belongs in the background.** A first build in a cold target took 18 minutes and
+  blocked the foreground at the 10-minute limit. Start long builds and test runs in the background
+  with output to a file, record the saved patch and the exact restore commands on the NOW board
+  before a step that swaps files in and out, and take the next step when the completion notice
+  arrives. (2026-10-30.)
