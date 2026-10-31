@@ -61,3 +61,14 @@ through with where it went, not deleted.
   with output to a file, record the saved patch and the exact restore commands on the NOW board
   before a step that swaps files in and out, and take the next step when the completion notice
   arrives. (2026-10-30.)
+- **A handoff packet's blockers describe its author's environment.** A plan written in a sandbox
+  listed "no full checkout" and "no Rust toolchain" as blockers; on the real machine both were
+  false. Before adopting a handoff's blockers, run its own verification commands and compare each
+  environment claim with the machine (`git rev-parse HEAD` against the pinned commit, tool
+  versions, targets), then record the stale ones as a finding. (2026-10-31, a large language port.)
+- **Ask what depends on a recommended tool before installing it.** A plan suggested a "pinned
+  toolchain" and a particular Node major; the person asked whether either was needed. Checking the
+  distro showed the toolchain manager's package conflicts with the packages that already worked,
+  and that Node was only needed for the reference app being compared against. Each answer became a
+  short decision file. A person's doubt about a system-level install is a prompt to verify, and
+  the answer can be "you're right". (2026-10-31.)
