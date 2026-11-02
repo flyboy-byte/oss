@@ -21,7 +21,8 @@ that file, and leave other docs alone. Don't open a PR per typo; batch the ones 
 
 **A good bug report** (often worth more than a fix):
 - Search existing issues first, closed ones too, and add to a thread instead of opening a duplicate.
-- Title says what is wrong, not what you were doing.
+- Title says what is wrong, not what you were doing, and makes sense to someone who has read
+  nothing else: name the command or screen, and leave out "there", "it" and names from your own notes.
 - Version or commit, OS, how you installed it.
 - The smallest steps that reproduce it, and what you expected vs what happened, with the exact error text.
 - Say what you already tried and what you did not test. Don't guess at causes as if they were facts.

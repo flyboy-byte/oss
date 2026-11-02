@@ -1,6 +1,8 @@
 ## What this adds or changes
 
-<!-- One or two sentences. A lesson, a playbook entry, a repo profile, a skill fix, docs... -->
+<!-- One or two sentences. A lesson, a playbook entry, a repo profile, a skill fix, docs...
+     Write the title and these lines for someone who has read nothing else: no "there", "it"
+     or names from your own chat. -->
 
 ## Where it comes from
 

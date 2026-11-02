@@ -206,6 +206,17 @@ All of these, every time:
 
 ## 5. Open the PR
 
+- **Write the title and opening line for a reviewer who has seen nothing else.** They have not
+  read the issue thread or your session, so a title full of words like "there", "it" or "the
+  body" means nothing to them. Name the feature or command by its UI name, then say what was
+  wrong and what changes, in plain words: "Print faces (the face each body lies on in the
+  slicer) are set only in the Send to Slicer window and shown only while it is open (#10247)",
+  not "Send to Slicer: pick one print face per body there, and show print faces only while it
+  is open (#10247)", where a reader can't tell what "there" and "it" are. The body's first sentence says what
+  the user saw before and what they see now. Before opening, reread the title and first
+  paragraph as if you had never seen the issue, and rewrite any pronoun, shorthand or
+  internal name you can't explain from those lines alone. The same goes for issue titles,
+  commit subjects and comments.
 - Follow the template and the style of recent merged PRs. Say what was broken, what changed, how
   you know it works, and **what you did not test**. Never claim a check you didn't run.
 - Visible behaviour: attach screenshots or a short recording you made yourself, before and after.
