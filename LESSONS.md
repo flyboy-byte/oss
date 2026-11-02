@@ -83,3 +83,24 @@ through with where it went, not deleted.
   on the home volume. Likewise, kernel OOM lines for capped cgroups said nothing about your own
   builds: a `global_oom` line did. Search the log for both kinds before saying a build has never
   been killed. (2026-11-02.)
+- **A green CI run is not parity.** In a port, the check that counts runs the original and the new code
+  on independent copies of the same input and compares success or failure, full error and progress
+  text, and output bytes. Skips are reported as skips with the reason, never as passes. (2026-11-02,
+  a large language port.)
+- **Fixed cases miss what fuzzing finds.** About 1,300 fixed parser cases passed; a seeded mutation
+  fuzz of 282,000 files (header edits, truncation, byte flips, token swaps) against the original found
+  one real divergence: an error message containing a JavaScript number printed it differently. Have
+  someone who did not write the unit run the fuzz. (2026-11-02.)
+- **Read the log before accepting a red check.** One upstream wall-time test failed on every run. It
+  was accepted only after reading each failing log, and its threshold was never raised. A tolerance or
+  seed is never loosened, and expected values are never regenerated from the new code. (2026-11-02.)
+- **Do not work around a sandbox denial.** A bulk remote-branch delete and one merge were denied until
+  the owner said so. Retry once as written, then hand over the exact command. (2026-11-02.)
+- **A shared priority file decides what the next agent does.** A second agent would have started with a
+  blocked unit because nothing ranked it lower. Fix the ranking file, not the agent, and make a task
+  depend on the unit it needs. (2026-11-02.)
+- **Candidate libraries need a behaviour check, not just licence and purity.** The best pure-Rust image
+  decoder passed licence, purity and build review and still matched the browser's pixels on 8 of 38
+  images. Nothing was adopted. (2026-11-02.)
+- **Counts in docs go stale; point at the generated file.** Hand-written PR numbers and unit counts in
+  several docs were out of date within a day. Link to the generated status instead. (2026-11-02.)

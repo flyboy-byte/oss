@@ -24,3 +24,9 @@ has worked on more than one case it moves into the skill and leaves a pointer he
   files (agent rules, PR and issue templates, a CI workflow that says plainly it is not the
   parity gate). Add a short ordered guide for a non-expert reader that tells the story with dates.
   (First tried 2026-10-31; outcome pending.)
+- **Porting a whole fork with several agents against a frozen original.** Pin and tag the original and
+  never edit it; keep work as one JSON unit file per task with lanes for priority and a next-task
+  command; claim by draft PR; compare original and port on independent copies of the same input; fuzz
+  by someone who did not write the unit; merge with merge commits, bottom-up, only when the owner says.
+  Full write-up: [`skill/oss-contribute/reference/agent-porting.md`](skill/oss-contribute/reference/agent-porting.md).
+  (First tried 2026-10-31 to 2026-11-02; 44 PRs merged, no unit accepted yet; outcome pending.)

@@ -29,6 +29,9 @@ PR or issue) unless they have given a standing OK (see below).
 - `reference/workflows.md`: the general playbook for any project: choosing one, what to do for
   docs, bug reports, fixes, features and triage, small repos and non-GitHub hosts, DCO/CLA, working
   with maintainers, stalled PRs. Read it when the job isn't a code fix on a big repo.
+- `reference/agent-porting.md`: porting the owner's own fork to another language with several agents
+  against a frozen original (units, lanes, differential testing, fuzzing, merge queue). Read it when
+  the job is a port, not a contribution.
 - `scripts/contrib-check.sh`: run inside the clone. Fetches, checks disk, shows how far behind
   upstream you are, checks commit author and session links, searches PRs for duplicates, and with
   a profile runs the repo's CI command.
