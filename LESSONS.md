@@ -72,3 +72,14 @@ through with where it went, not deleted.
   and that Node was only needed for the reference app being compared against. Each answer became a
   short decision file. A person's doubt about a system-level install is a prompt to verify, and
   the answer can be "you're right". (2026-10-31.)
+- **Never stop a build with `pkill -f` or `pgrep -f`.** The pattern matches the shell running your
+  own command (its text contains the pattern), so it kills that shell and leaves the build's
+  compiler children running, here 13 of 14 GB of RAM, one step from the next out-of-memory kill.
+  Stop only a process you started, by its PID, and stop its children by PID too. A project's rules
+  may already say so (one forbade `pkill`); the rule was written for exactly this. (2026-11-02.)
+- **"Disk full" can be the temp directory, and an OOM can be global.** A tool reported 0 MB free
+  on the volume holding its temp directory; that was a RAM-backed `tmpfs`, while the disk had
+  80 GB free, and acting on "disk low" would have been wrong. Run `df` on the named path, not only
+  on the home volume. Likewise, kernel OOM lines for capped cgroups said nothing about your own
+  builds: a `global_oom` line did. Search the log for both kinds before saying a build has never
+  been killed. (2026-11-02.)
