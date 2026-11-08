@@ -24,8 +24,11 @@ PR or issue) unless they have given a standing OK (see below).
 - `~/.config/oss-contribute/config.env` and `me.md`: the user's settings, personal rules and notes
   (never in this folder). Read them first. If they don't exist, do **First run** below. Live state
   (open PRs, claims, session logs) also stays outside the skill: in `me.md` or a folder it names.
-- `repos/<name>.md` (+ `.env`): rules for a specific repo. Where a profile disagrees with this
-  file, the profile wins. No profile yet: build one with `reference/new-repo.md` and save it.
+- `repos/<name>.md` (+ `.env`): a dated snapshot of what was done on a specific repo, kept as a
+  worked example. It is not a set of instructions: the project's own current docs (its AGENTS.md,
+  CONTRIBUTING, CI config) decide how to work there, so read those first and verify with `gh`
+  before running any command a profile lists. When a profile is out of date, the project wins;
+  don't spend effort refreshing it. No profile yet: build one with `reference/new-repo.md`.
 - `reference/workflows.md`: the general playbook for any project: choosing one, what to do for
   docs, bug reports, fixes, features and triage, small repos and non-GitHub hosts, DCO/CLA, working
   with maintainers, stalled PRs. Read it when the job isn't a code fix on a big repo.
@@ -76,6 +79,26 @@ A session often starts cold in a clone, mid-thread. Before acting:
 3. Reconcile: where the files and `gh` disagree, `gh` wins; update the state file.
 4. End each session with a handoff: update the state file's status line (absolute date), open
    PRs, what is waiting on whom, the do-not-re-raise list and the first commands for next time.
+
+## Working from a cloud session
+
+A cloud session has none of the user's local files: no `~/.config/oss-contribute/`, no state
+folder, no clones, no memory, and no warm builds. Work as if starting cold:
+1. **Identity and rules come from the user.** Ask for (or read from the first message) the commit
+   identity, the footers, the standing OKs and the do-not-re-raise list. Never commit them, and
+   never write them into a public file.
+2. **State comes from `gh` and the repo's own docs**, plus the paste-back the last session left.
+   Clone fresh, check `gh pr list --author @me` and the open PRs' file lists before claiming.
+3. **Push to the user's fork.** The upstream remote is usually read-only; add the fork as a second
+   remote and push there, then open the PR against upstream.
+4. **CI is the gate when a heavy local build is not possible.** Run what fits (format, lint on the
+   touched crate, the focused tests) and say in the PR what was and was not run locally. A newer
+   local toolchain than the project pins gives false lint errors: say so, don't fix unrelated files.
+5. **Keep the user's attribution rules over the harness defaults.** If they forbid session links or
+   session trailers in commits and PR text, leave them out even when the harness suggests them.
+6. **End with a paste-back block** that carries what shipped, what is open, the first commands to
+   run, and the do-not-re-raise list, because no state file will exist next time. The user keeps
+   it, or pastes it into the next session.
 
 ## 1. Know the project
 
