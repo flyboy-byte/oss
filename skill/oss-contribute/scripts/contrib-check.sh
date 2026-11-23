@@ -7,7 +7,7 @@
 #                 snapshot, so the script lists what the project's own workflows run instead.
 #   keywords    : searched in open and merged upstream PRs to catch duplicates
 # Reads ~/.config/oss-contribute/config.env (NAME, EMAIL, SESSION_LINKS). With no such file (a
-# cloud session) set OSS_CONTRIBUTE_EMAIL to the commit email to check; session links default to no.
+# fresh environment) set OSS_CONTRIBUTE_EMAIL to the commit email to check; session links default to no.
 # Never deletes anything; apart from `git fetch` and the CI command it only reads.
 set -u
 here=$(cd "$(dirname "$0")" && pwd)

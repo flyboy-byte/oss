@@ -48,11 +48,9 @@ mkdir -p ~/.claude/skills
 cp -r oss/skill/oss-contribute ~/.claude/skills/
 ```
 
-**In a cloud session** nothing local exists, so the skill has to be fetched. In the first message
-ask Claude to run the two commands above (or to read `skill/oss-contribute/SKILL.md` from that
+**In a fresh environment** (new machine, sandbox, hosted session) nothing local exists, so the skill has to be fetched. Ask Claude to run the two commands above (or to read `skill/oss-contribute/SKILL.md` from that
 repo), then give it your commit identity, footers, standing OKs and do-not-re-raise list; see
-"Working from a cloud session" in `SKILL.md`. How a given cloud environment loads skills varies, so
-check that it picked the skill up.
+"Working in a fresh environment" in `SKILL.md`. Check that the skill was picked up.
 
 Then in Claude Code, inside a clone of the project: "find a good first issue in this repo and fix
 it", "open a PR for this", "answer the review on my PR". On first use Claude asks a few questions

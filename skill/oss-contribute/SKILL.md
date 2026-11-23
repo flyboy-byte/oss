@@ -1,6 +1,6 @@
 ---
 name: oss-contribute
-description: Contribute to any open-source project with Claude doing the work, from a one-line docs fix or a good bug report to a tested fix, a feature, triage of an issue backlog or an inventory task (such as a panic-site audit), on small solo repos and large agent-heavy ones alike, from a local clone or a cloud session. Covers reading the project's rules, picking and claiming an issue, reproducing the bug, mirroring CI locally, tests that prove the fix, commit identity and sign-off, an honest PR, commenting on other people's PRs, handling human and bot reviews, and cleaning up after the merge. Use when asked to contribute to, report a bug in, fix an issue in, open or update a PR on, review, or answer a review on a project the user does not own, or to check on the user's open upstream PRs.
+description: Contribute to any open-source project with Claude doing the work, from a one-line docs fix or a good bug report to a tested fix, a feature, triage of an issue backlog or an inventory task (such as a panic-site audit), on small solo repos and large agent-heavy ones alike, on any machine or environment. Covers reading the project's rules, picking and claiming an issue, reproducing the bug, mirroring CI locally, tests that prove the fix, commit identity and sign-off, an honest PR, commenting on other people's PRs, handling human and bot reviews, and cleaning up after the merge. Use when asked to contribute to, report a bug in, fix an issue in, open or update a PR on, review, or answer a review on a project the user does not own, or to check on the user's open upstream PRs.
 ---
 
 # oss-contribute: contributing to other people's projects with Claude
@@ -84,9 +84,9 @@ A session often starts cold in a clone, mid-thread. Before acting:
 4. End each session with a handoff: update the state file's status line (absolute date), open
    PRs, what is waiting on whom, the do-not-re-raise list and the first commands for next time.
 
-## Working from a cloud session
+## Working in a fresh environment
 
-A cloud session has none of the user's local files: no `~/.config/oss-contribute/`, no state
+A new machine, a sandbox, a hosted session or a teammate's checkout has none of the user's local files: no `~/.config/oss-contribute/`, no state
 folder, no clones, no memory, and no warm builds. Work as if starting cold:
 1. **Identity and rules come from the user.** Ask for (or read from the first message) the commit
    identity, the footers, the standing OKs and the do-not-re-raise list. Never commit them, and
