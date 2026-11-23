@@ -1,5 +1,7 @@
 # wdunn001/pcbcraft
 
+> **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
+
 MCP-first Rust EDA app (single-window tabbed editor, KiCad compatibility, craft-libs). GPL-3.0,
 unlike its MIT/Apache siblings. **The project's home is the `wdunn001/pcbcraft` fork** (its "Start
 here" issue, #1, says so). The old tracker `tangency-labs/pcbcraft` is frozen: do not post, comment

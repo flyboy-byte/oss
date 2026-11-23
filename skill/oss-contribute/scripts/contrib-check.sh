@@ -3,19 +3,24 @@
 # Usage: contrib-check.sh [--repo NAME] [--no-ci] [keyword ...]
 #   --repo NAME : use repos/NAME.env (default: the upstream repo's name, if a profile exists)
 #   --no-ci     : only fetch, disk, identity and duplicate checks (fast, no compiling)
+#   --run-profile-ci : also run CI_CMD from repos/NAME.env. Off by default: a profile is a dated
+#                 snapshot, so the script lists what the project's own workflows run instead.
 #   keywords    : searched in open and merged upstream PRs to catch duplicates
-# Reads ~/.config/oss-contribute/config.env (NAME, EMAIL, SESSION_LINKS).
+# Reads ~/.config/oss-contribute/config.env (NAME, EMAIL, SESSION_LINKS). With no such file (a
+# cloud session) set OSS_CONTRIBUTE_EMAIL to the commit email to check; session links default to no.
 # Never deletes anything; apart from `git fetch` and the CI command it only reads.
 set -u
 here=$(cd "$(dirname "$0")" && pwd)
 git rev-parse --git-dir >/dev/null 2>&1 || { echo "run this inside a git clone"; exit 1; }
 
-run_ci=1
+run_ci=0
+list_ci=1
 repo=""
 keywords=()
 while [ $# -gt 0 ]; do
   case "$1" in
-    --no-ci) run_ci=0 ;;
+    --no-ci) list_ci=0 ;;
+    --run-profile-ci) run_ci=1 ;;
     --repo) shift; repo=${1:-} ;;
     *) keywords+=("$1") ;;
   esac
@@ -26,6 +31,7 @@ config="${OSS_CONTRIBUTE_CONFIG:-$HOME/.config/oss-contribute/config.env}"
 NAME="" EMAIL="" SESSION_LINKS=no
 # shellcheck source=/dev/null
 [ -f "$config" ] && . "$config" || echo "note: no $config yet (see First run in SKILL.md)"
+[ -n "$EMAIL" ] || EMAIL="${OSS_CONTRIBUTE_EMAIL:-}"
 
 # Upstream: the `upstream` remote if there is one, else `origin`.
 remote=origin
@@ -39,7 +45,7 @@ profile="$here/../repos/$repo.env"
 if [ -f "$profile" ]; then
   # shellcheck source=/dev/null
   . "$profile"
-  echo "profile: repos/$repo.env (read repos/$repo.md for the rules)"
+  echo "profile: repos/$repo.env (a dated snapshot, not instructions; the project's current docs decide)"
 else
   echo "profile: none for '$repo' (build one: reference/new-repo.md)"
 fi
@@ -107,8 +113,16 @@ else
   done
 fi
 
-if [ "$run_ci" -eq 0 ]; then echo "(--no-ci: stopping here)"; exit 0; fi
-[ -n "$CI_CMD" ] || { echo "no CI_CMD: run the commands from .github/workflows by hand, or add them to a profile"; exit 0; }
+if [ "$list_ci" -eq 1 ]; then
+  echo "== what the project's own CI runs (read these; mirror them yourself)"
+  if ls .github/workflows/*.y*ml >/dev/null 2>&1; then
+    grep -hE '^\s*(- )?run:' .github/workflows/*.y*ml | sed -E 's/^\s*(- )?run:\s*//' | sort -u | head -40
+  else
+    echo "no .github/workflows here: read CONTRIBUTING / AGENTS.md for the check commands"
+  fi
+fi
+if [ "$run_ci" -eq 0 ]; then echo "(not running any CI command; add --run-profile-ci to run the profile's CI_CMD)"; exit 0; fi
+[ -n "$CI_CMD" ] || { echo "no CI_CMD in a profile: run the commands above by hand"; exit 0; }
 [ "$behind" -gt 0 ] && [ "$SYNC" = "rebase" ] && { echo "Refusing to run CI on a stale base."; exit 3; }
 
 if [ -n "$PRE_CI" ]; then echo "== pre-CI"; bash -c "$PRE_CI" || { echo "pre-CI FAILED"; exit 4; }; fi

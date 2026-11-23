@@ -1,5 +1,7 @@
 # tangency-labs/solidcraft
 
+> **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
+
 Pure-Rust parametric CAD app. Agent-driven: contributions by AI agents are expected. Remotes:
 `origin` = upstream (read-only; the repo's docs may still name its old owner, before it moved to
 tangency-labs in 2026-10), `fork` = your fork. Read `AGENTS.md` each time: it is long and changes
@@ -9,7 +11,7 @@ boss: where it and these notes differ, check `AGENTS.md`, `CONTRIBUTING.md` and 
 for what is current, and tell the user. Refined copies of parts of it are at the bottom of this file.
 
 ## Kernel (2026-10-27)
-The kernel on `main` is truck (`crates/kernel` only). Kernel work is paused (#3992) while
+As of 2026-10-27 the kernel on `main` was truck (`crates/kernel` only); by 0.40.0-rc.3 (2026-11-07) solidcore is the only kernel. Kernel work is paused (#3992) while
 tangency-labs/solidcore is evaluated: no new kernel issues, PRs or discussions. A kernel bug's
 reproduction goes into solidcore's regression suite as a fixture instead (`repos/solidcore.md`,
 "SolidCraft kernel bugs as fixtures"). Check which kernel a code path uses before diagnosing.

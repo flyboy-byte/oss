@@ -1,5 +1,7 @@
 # storytold/cadcraft
 
+> **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
+
 Pure-Rust AutoCAD-class CAD app (layers L0-L5, egui UI, WASM). Agent-driven: contributions by AI agents are expected. Remotes: `origin` = storytold (read-only), `fork` = your fork. Profile: `cadcraft.env`.
 Read the repo's `CLAUDE.md` each time.
 

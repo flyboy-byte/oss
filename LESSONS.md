@@ -44,14 +44,14 @@ through with where it went, not deleted.
 - ~~**A PR can be queued without warning.**~~ SKILL.md section 6, head rule (2026-10-29).
 - ~~**Parallel worktrees multiply incremental build output.**~~ SKILL.md "Git habits" and
   `repos/solidcraft.md` (2026-10-29: 26 GB regrown within a day).
-- **A new test can pass on untouched `main`.** In a UI search fix, the first test used a helper
+- ~~**A new test can pass on untouched `main`.**~~ SKILL.md section 3, "Prove the tests" (folded 2026-11-23). Original: In a UI search fix, the first test used a helper
   that finds a control whether or not it is drawn (hidden controls sit off screen but still
   exist), so it passed with no fix at all, and again with half the fix removed. Run the new test on
   unmodified `main` first and watch it fail with the reporter's message; assert on what the user
   sees (drawn, on screen), not on what exists; then take the fix apart one piece at a time and see
   a failure each time. (2026-10-30, solidcraft #9318.) Candidate for SKILL.md section 3, "Prove the
   tests".
-- **Issues found by someone else's automation are candidates, not picks.** A list from another tool
+- ~~**Issues found by someone else's automation are candidates, not picks.**~~ SKILL.md section 2 (folded 2026-11-23). Original: A list from another tool
   or session went through the usual screen: a label like `kernel-paused` or an area tag drops an
   issue in one read, a claim comment or an open PR that names the number drops another, and what
   is left still gets the whole-thread read and a fresh-`main` repro. Of five listed, one was left.
@@ -72,7 +72,7 @@ through with where it went, not deleted.
   and that Node was only needed for the reference app being compared against. Each answer became a
   short decision file. A person's doubt about a system-level install is a prompt to verify, and
   the answer can be "you're right". (2026-10-31.)
-- **Never stop a build with `pkill -f` or `pgrep -f`.** The pattern matches the shell running your
+- ~~**Never stop a build with `pkill -f` or `pgrep -f`.**~~ SKILL.md section 3, last bullet (folded 2026-11-23). Original: The pattern matches the shell running your
   own command (its text contains the pattern), so it kills that shell and leaves the build's
   compiler children running, here 13 of 14 GB of RAM, one step from the next out-of-memory kill.
   Stop only a process you started, by its PID, and stop its children by PID too. A project's rules
@@ -104,3 +104,14 @@ through with where it went, not deleted.
   images. Nothing was adopted. (2026-11-02.)
 - **Counts in docs go stale; point at the generated file.** Hand-written PR numbers and unit counts in
   several docs were out of date within a day. Link to the generated status instead. (2026-11-02.)
+- **A script that runs a profile's commands turns a snapshot into an order.** The check script ran each
+  repo profile's CI command; after the project renamed a crate and bumped its toolchain, that command
+  was wrong. The script now prints the project's own workflow commands and runs a profile's command only
+  on request. Profiles are dated examples; the project's docs decide. (2026-11-23.)
+- **Pull big issue lists with REST pages, not one GraphQL query.** Fetching about 6,000 issues with
+  bodies and comments in one query hit the secondary rate limit. 100-per-page REST calls with short
+  sleeps finished. A first estimate that the empty issues were an easy win was also wrong: they were
+  auto-filed crash reports. Read a sample of each bucket before promising anything. (2026-11-07.)
+- **A guard-only test passes on `main`; prove it by mutation.** A test for a bound that already
+  holds can't fail without a fix. Break the guard, see the test fail, restore it, and say so in the PR.
+  (2026-11-08, a panic-site audit.)

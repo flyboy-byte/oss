@@ -1,6 +1,8 @@
 # tangency-labs/solidcore
 
-Rust port of NVIDIA SMLib (the geometry kernel SolidCraft will use). Agent-driven: contributions
+> **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
+
+Geometry kernel based on NVIDIA SMLib (as of 2026-11 it is SolidCraft's only kernel). Agent-driven: contributions
 by AI agents are expected. Remotes: `origin` = tangency-labs (read-only), `fork` = your fork.
 
 ## Claim

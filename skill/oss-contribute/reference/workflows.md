@@ -41,6 +41,27 @@ the code; coverage for its own sake isn't a contribution.
 **Triage and reproduction.** Reproducing someone else's bug and posting the narrowed steps, or
 confirming a fix works, helps maintainers and needs no code. Follow the commenting rules in SKILL.md.
 
+**Triaging a big backlog from outside.** Thousands of open issues is not a quick win: many "empty"
+ones are auto-filed crash or "operation failed" reports with no steps.
+- Fetch with REST pages (100 per page) and short sleeps, not one GraphQL query with bodies and
+  comments; the big query hit the secondary rate limit. Keep the dump locally, never in a repo.
+- Bucket first (no comments, no assignee, no attachment, claimed, has a PR), then read a sample of
+  each bucket before writing any comment. Skip anything claimed or already discussed.
+- The useful comment asks for what is missing (the design or file, the version) in two lines, or
+  reports a re-run: "reproduced / fixed / regressed on `<version>`" in a small table per build.
+- Show the text and the issue list and get one OK for the batch, post, and keep a log of the
+  comment links. Wait for the maintainers' reaction before a second batch.
+- Re-run a saved set of repro scripts on each new release; a script that exits 0 only ran, it
+  isn't proof of a fix.
+- Be honest about the yield: most of the backlog needs the reporter, not the contributor.
+
+**Inventory and ratchet tasks** (a list of sites to audit, such as panic sites, `unwrap`s or missing
+docs, where the list may only shrink). Read the checker script and run its self-test first. Work
+one slice at a time (a module directory), claim it the way the project says, and check that no
+open PR edits the same files. Each entry is fixed in code (a typed error) or marked proven with a
+reason that says why it cannot fail; never loosen the checker or the ratchet. Add a test for each
+guard you rely on, and state the before and after counts in the PR.
+
 **Translations and packaging.** Follow the project's file layout and glossary exactly; ask who
 reviews the language. For packages (distro, F-Droid, Homebrew), the packaging repo's rules win.
 
@@ -78,7 +99,8 @@ the full suite, not a subset.
 ## Working with maintainers
 - Be brief, specific and polite; the first message is the one they judge you by.
 - One question at a time, with what you already checked.
-- Silence for a week is normal: one gentle nudge, then wait or move on. Never ping repeatedly.
+- Silence for a week is normal: wait or move on. Don't nudge about reviews, CI approval or labels
+  unless the project's rules or the user say to. Never ping repeatedly.
 - "No" is an answer. Don't argue the project's direction; ask what would make it acceptable, or
   keep the change in your fork.
 - Thank people who review. Say when you were wrong, and fix it without defending the first draft.

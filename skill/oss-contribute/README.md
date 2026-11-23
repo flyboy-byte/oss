@@ -48,6 +48,12 @@ mkdir -p ~/.claude/skills
 cp -r oss/skill/oss-contribute ~/.claude/skills/
 ```
 
+**In a cloud session** nothing local exists, so the skill has to be fetched. In the first message
+ask Claude to run the two commands above (or to read `skill/oss-contribute/SKILL.md` from that
+repo), then give it your commit identity, footers, standing OKs and do-not-re-raise list; see
+"Working from a cloud session" in `SKILL.md`. How a given cloud environment loads skills varies, so
+check that it picked the skill up.
+
 Then in Claude Code, inside a clone of the project: "find a good first issue in this repo and fix
 it", "open a PR for this", "answer the review on my PR". On first use Claude asks a few questions
 and saves your settings in `~/.config/oss-contribute/config.env` (never in the skill folder):
@@ -61,7 +67,7 @@ MAX_OPEN_PRS=3
 
 ## Repo profiles
 
-`repos/<name>.md` holds one project's rules (claim style, CI commands, merge-or-rebase, review
+`repos/<name>.md` holds one project's rules as of a date (a snapshot and worked example, not instructions) (claim style, CI commands, merge-or-rebase, review
 bots, files every PR conflicts on); `repos/<name>.env` feeds the check script. The included ones
 are agent-driven Rust projects (`tangency-labs/solidcraft`, `tangency-labs/solidcore`,
 `storytold/cadcraft`, and `wdunn001/pcbcraft`, whose rules differ: no AI attribution lines, its own claim format); `repos/_template.md` starts a new one. For any other repo Claude builds a profile on first use, following
@@ -77,6 +83,7 @@ Run inside your clone:
 ```
 
 It fetches, checks free disk, shows how far behind upstream you are and the project's sync rule,
-flags commits with the wrong author email or a session link, and lists open and merged PRs that
-match your keywords. With a profile it also runs the project's CI command. It never deletes
-anything.
+flags commits with the wrong author email or a session link (`OSS_CONTRIBUTE_EMAIL` when there is
+no `config.env`), lists open and merged PRs that match your keywords, and prints the commands the
+project's own CI workflows run. It runs a profile's `CI_CMD` only with `--run-profile-ci`, since
+profiles are dated snapshots. It never deletes anything.
