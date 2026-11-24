@@ -2,6 +2,8 @@
 
 > **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
 
+> **Update 2026-11-23:** solidcore was later vendored into the solidcraft repo (a `solidcore/` folder) and the standalone repo became a mirror that takes no PRs. Kernel work then went through solidcraft `main`, and the "kernel paused" rule was gone from its CONTRIBUTING. Everything below describes the earlier layout.
+
 Geometry kernel based on NVIDIA SMLib (as of 2026-11 it is SolidCraft's only kernel). Agent-driven: contributions
 by AI agents are expected. Remotes: `origin` = tangency-labs (read-only), `fork` = your fork.
 

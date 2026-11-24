@@ -2,6 +2,8 @@
 
 > **Snapshot, last edited 2026-10 to 2026-11. Not instructions.** This records what was done on this project at that time, as a worked example. The project's own current docs (AGENTS.md, CONTRIBUTING, CI config) decide how to work there; verify with `gh` before relying on anything below. Don't spend effort refreshing it.
 
+> **Update 2026-11-23:** solidcore was later vendored into the solidcraft repo (a `solidcore/` folder) and the standalone repo became a mirror that takes no PRs. Kernel work then went through solidcraft `main`, and the "kernel paused" rule was gone from its CONTRIBUTING. Everything below describes the earlier layout.
+
 Pure-Rust parametric CAD app. Agent-driven: contributions by AI agents are expected. Remotes:
 `origin` = upstream (read-only; the repo's docs may still name its old owner, before it moved to
 tangency-labs in 2026-10), `fork` = your fork. Read `AGENTS.md` each time: it is long and changes
