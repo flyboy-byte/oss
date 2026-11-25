@@ -115,3 +115,19 @@ through with where it went, not deleted.
 - **A guard-only test passes on `main`; prove it by mutation.** A test for a bound that already
   holds can't fail without a fix. Break the guard, see the test fail, restore it, and say so in the PR.
   (2026-11-08, a panic-site audit.)
+- **Check what the installed release reports, not the dev run.** A version endpoint answered "dev" on
+  the live server because it looked for its version file relative to the working directory, which a
+  service manager sets differently from a dev shell. Read it relative to the install root (the
+  jar's or binary's location), and check the endpoint on the installed copy after each deploy.
+  (2026-11-25.)
+- **A strict "after" filter and equal timestamps.** A test that expected a second event after a first
+  one failed because a fake clock gave both the same time and the code filters with `t > after`.
+  Advance the fake clock between events instead of loosening the filter. (2026-11-25.)
+- **A registry 429 in CI is a flake, not a build problem.** A dependency download rate-limited on one
+  run; re-running only the failed jobs (`gh run rerun <id> --failed`) passed with no change. Read the
+  error before touching the build file; a fork contributor can't re-run, so say so in the PR and leave
+  it to a maintainer. (2026-11-25.)
+- **Converting a model: compare outputs on the same inputs.** After converting a detector to another
+  format and precision, run the original and the converted file on the same images and report the
+  largest difference (here under 0.001) before trusting it. Test on the cases that went wrong, such as
+  real false alarms, and never fetch harmful content to build a test set. (2026-11-25.)
